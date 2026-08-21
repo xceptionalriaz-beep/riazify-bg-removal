@@ -74,7 +74,7 @@ def verify_secret(request: Request):
     if secret != BG_SERVICE_SECRET:
         raise HTTPException(status_code=401, detail="Invalid API secret")
 
-# ── Health check ───────────────────────────────────────────────
+# ── Health check / warmup ──────────────────────────────────────
 @app.get("/health")
 async def health():
     return {
@@ -82,6 +82,11 @@ async def health():
         "model": MODEL_NAME,
         "model_loaded": SESSION is not None,
     }
+
+@app.get("/warmup")
+async def warmup():
+    """Call this to wake the service before removing backgrounds"""
+    return { "ready": SESSION is not None }
 
 # ── Main endpoint ──────────────────────────────────────────────
 @app.post("/remove-bg", dependencies=[Depends(verify_secret)])
