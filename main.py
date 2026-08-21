@@ -40,6 +40,9 @@ MODEL_NAME        = os.getenv("REMBG_MODEL", "u2net")
 MAX_IMAGE_MB      = int(os.getenv("MAX_IMAGE_MB", "12"))
 MAX_IMAGE_BYTES   = MAX_IMAGE_MB * 1024 * 1024
 
+# Debug — log what secret was loaded so we can verify Railway injected it
+print(f"[STARTUP] BG_SERVICE_SECRET starts with: {BG_SERVICE_SECRET[:6]}... len={len(BG_SERVICE_SECRET)}", flush=True)
+
 # ── App ────────────────────────────────────────────────────────
 app = FastAPI(
     title="Riazify BG Removal",
