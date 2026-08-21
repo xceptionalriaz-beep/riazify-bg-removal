@@ -36,7 +36,7 @@ logger = logging.getLogger("bg-removal")
 
 # ── Config ─────────────────────────────────────────────────────
 BG_SERVICE_SECRET = os.getenv("BG_SERVICE_SECRET", "dev-secret-change-me")
-MODEL_NAME        = os.getenv("REMBG_MODEL", "birefnet-general")
+MODEL_NAME        = os.getenv("REMBG_MODEL", "u2net")
 MAX_IMAGE_MB      = int(os.getenv("MAX_IMAGE_MB", "12"))
 MAX_IMAGE_BYTES   = MAX_IMAGE_MB * 1024 * 1024
 
